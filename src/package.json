@@ -1,0 +1,26 @@
+{
+  "name": "Cambio",
+  "version": "1.0.0",
+  "description": "Projetar, calcular, comprar moedas estrangeiras p2p ou direto de uma casa de cambio proxima, calculadora, mapa, graphicos sobre a cotacao mensal, diaria e anual",
+  "author": "Kevin Yuji Kobori",
+  "start date": "11/06/2020",
+  "private": true,
+  "scripts": {
+    "dev": "cross-env NODE_ENV=development nodemon server/index.js --watch server",
+    "build": "nuxt build",
+    "start": "cross-env NODE_ENV=production node server/index.js",
+    "generate": "nuxt generate"
+  },
+  "dependencies": {
+    "axios": "^0.19.2",
+    "cross-env": "^5.2.0",
+    "express": "^4.16.4",
+    "nuxt": "^2.0.0"
+  },
+  "devDependencies": {
+    "@nuxtjs/vuetify": "^1.0.0",
+    "node-sass": "^4.14.1",
+    "nodemon": "^1.18.9",
+    "sass-loader": "^8.0.2"
+  }
+}
