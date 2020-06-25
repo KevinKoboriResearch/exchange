@@ -15,16 +15,16 @@
       </v-expand-transition>
     </div> -->
 
-    
+    <ColorPicker/>
 
   <!-- <CalcPosition/> -->
-  <CalcShow/>
-  <Flutuante/>
   <!-- <Calculator/> -->
+  <!-- <CalcShow/>
+  <Flutuante/>
   <Chat/>
   <CalculatorApple/>
   <CalculatorBlue/>
-  <CalculatorYellow/>
+  <CalculatorYellow/> -->
   </div>
 </template>
 
@@ -38,6 +38,8 @@ import CalcShow from '~/components/calculator/CalcShow.vue'
 import CalcPosition from '~/components/calculator/CalcPosition.vue'
 import Chat from '~/components/calculator/Chat.vue'
 import Calculator from '~/components/calculator/Calculator.vue'
+// import Icon from '~/components/Icon.vue'
+import ColorPicker from '~/components/ColorPicker.vue'
 // import Keyup from '~/components/calculator/Keyup.vue'
 
 export default {
@@ -57,7 +59,8 @@ export default {
     Flutuante,
     CalcShow,
     CalcPosition,
-    Chat
+    Chat,
+    ColorPicker
     // Keyup
   },
   // watch: {

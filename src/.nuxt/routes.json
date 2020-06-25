@@ -1,0 +1,20 @@
+[
+  {
+    "name": "graficos",
+    "path": "/graficos",
+    "component": "/Users/kevinkobori/Documents/projects/exchange/src/pages/graficos.vue",
+    "chunkName": "pages/graficos"
+  },
+  {
+    "name": "moedas",
+    "path": "/moedas",
+    "component": "/Users/kevinkobori/Documents/projects/exchange/src/pages/moedas.vue",
+    "chunkName": "pages/moedas"
+  },
+  {
+    "name": "index",
+    "path": "/",
+    "component": "/Users/kevinkobori/Documents/projects/exchange/src/pages/index.vue",
+    "chunkName": "pages/index"
+  }
+]

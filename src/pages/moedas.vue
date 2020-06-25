@@ -9,8 +9,8 @@
       sm8
       md6
     >
-    <Theme/>
-    <Exchange/>
+    <!-- <Theme/> -->
+    <!-- <Exchange/> -->
       <v-card>
         <v-card-title class="headline">
           Welcome to the Vuetify + Nuxt.js template
@@ -39,7 +39,7 @@ import Logo from '~/components/Logo.vue'
 import VuetifyLogo from '~/components/VuetifyLogo.vue'
 import CalcularCambio from '~/components/CalcularCambio.vue'
 import ScrollYTransition from '~/components/ScrollYTransition.vue'
-import Theme from '~/components/Theme.vue'
+// import Theme from '~/components/Theme.vue'
 import CitysList from '~/components/CitysList.vue'
 import CambioTypes from '~/components/CambioTypes.vue'
 import Exchange from '~/components/exchange/Exchange.vue'
@@ -51,7 +51,7 @@ export default {
     VuetifyLogo,
     CalcularCambio,
     ScrollYTransition,
-    Theme,
+    // Theme,
     CitysList,
     CambioTypes,
     Exchange

@@ -1,9 +1,9 @@
 <template>
-  <v-card dark>
-    <v-toolbar
+  <!-- <v-card dark> -->
+    <!-- <v-toolbar
       color="purple accent-4"
       flat
-    >
+    > -->
       <v-switch
         color="white"
         v-model="$vuetify.theme.dark"
@@ -11,8 +11,8 @@
         inset
         label="Theme Dark"
       ></v-switch>
-    </v-toolbar>
-  </v-card>
+    <!-- </v-toolbar> -->
+  <!-- </v-card> -->
 </template>
 
 <script>
