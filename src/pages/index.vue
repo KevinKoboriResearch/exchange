@@ -1,5 +1,5 @@
 <template>
-<div>
+  <div>
 
 
   <!-- <v-btn
@@ -15,7 +15,7 @@
       </v-expand-transition>
     </div> -->
 
-    <ColorPicker/>
+    <!-- <ColorPicker/> -->
 
   <!-- <CalcPosition/> -->
   <!-- <Calculator/> -->
@@ -30,48 +30,48 @@
 
 <script>
 // import Calculator from '~/components/Calculator.vue'
-import CalculatorApple from '~/components/calculator/CalculatorApple.vue'
-import CalculatorBlue from '~/components/calculator/CalculatorBlue.vue'
-import CalculatorYellow from '~/components/calculator/CalculatorYellow.vue'
-import Flutuante from '~/components/calculator/Flutuante.vue'
-import CalcShow from '~/components/calculator/CalcShow.vue'
-import CalcPosition from '~/components/calculator/CalcPosition.vue'
-import Chat from '~/components/calculator/Chat.vue'
-import Calculator from '~/components/calculator/Calculator.vue'
+// import CalculatorApple from '~/components/calculator/CalculatorApple.vue'
+// import CalculatorBlue from '~/components/calculator/CalculatorBlue.vue'
+// import CalculatorYellow from '~/components/calculator/CalculatorYellow.vue'
+// import Flutuante from '~/components/calculator/Flutuante.vue'
+// import CalcShow from '~/components/calculator/CalcShow.vue'
+// import CalcPosition from '~/components/calculator/CalcPosition.vue'
+// import Chat from '~/components/calculator/Chat.vue'
+// import Calculator from '~/components/calculator/Calculator.vue'
+// import ColorPicker from '~/components/ColorPicker.vue'
 // import Icon from '~/components/Icon.vue'
-import ColorPicker from '~/components/ColorPicker.vue'
 // import Keyup from '~/components/calculator/Keyup.vue'
 
 export default {
-  props:{
-    oi: Boolean
-  },
+  // props:{
+  //   oi: Boolean
+  // },
   // data() {
   //   return {
   //     hidden: this.oi
   //   }
   // },
   components: {
-    Calculator,
-    CalculatorApple,
-    CalculatorBlue,
-    CalculatorYellow,
-    Flutuante,
-    CalcShow,
-    CalcPosition,
-    Chat,
-    ColorPicker
+    // Calculator,
+    // CalculatorApple,
+    // CalculatorBlue,
+    // CalculatorYellow,
+    // Flutuante,
+    // CalcShow,
+    // CalcPosition,
+    // Chat,
+    // ColorPicker
     // Keyup
-  },
+  },  
   // watch: {
   //   oi: Boolean
   // }
-  methods: {
-  now: function () {
-    console.log(this.oi)
-    return this.oi
-  }
-}
+  // methods: {
+  //   now: function () {
+  //     console.log(this.oi)
+  //     return this.oi
+  //   }
+  // }
 }
 </script>
 

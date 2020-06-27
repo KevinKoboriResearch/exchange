@@ -2,7 +2,9 @@
     <v-app>
       <v-content>
       <v-system-bar :color="picker"></v-system-bar>
-      <v-app-bar :color="defaultColor" fixed>
+      <v-app-bar :color="siteBarColor" fixed 
+      >
+      <!-- light -->
         <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
         &nbsp;&nbsp;&nbsp;
         <v-switch
@@ -12,16 +14,10 @@
           inset
         ></v-switch>
         <v-spacer></v-spacer>
-        <v-toolbar-title>MEUCAMBIO.COM</v-toolbar-title>
+        <v-toolbar-title>{{ SiteTitle }}</v-toolbar-title>
         <v-spacer></v-spacer>
-        <v-btn icon>
-          <v-icon>mdi-magnify</v-icon>
-        </v-btn>
-        <v-btn icon @click="oi = !oi">
-          <v-icon>mdi-filter</v-icon>
-        </v-btn>
-        <v-btn icon>
-          <v-icon>mdi-dots-vertical</v-icon>
+        <v-btn icon @click="globalTextArea = !globalTextArea">
+          <v-icon>mdi-book</v-icon>
         </v-btn>
         <v-app-bar-nav-icon @click.stop="rightDrawer = !rightDrawer"></v-app-bar-nav-icon>
       </v-app-bar>
@@ -30,15 +26,16 @@
         v-model="drawer"
         absolute
         temporary
-        :color="defaultColor"
+        :color="siteBarColor"
       >
-        <!-- bottom -->
         <v-list
           nav
           dense
         >
+          <!-- light -->
           <v-list-item-group
             v-model="group"
+            light
           >
           <v-list-item
             v-for="(item, i) in items"
@@ -48,7 +45,8 @@
             exact
           >
             <v-list-item-action>
-              <img :src="getImgUrl(item.icon)">
+              <!-- <img :src="getImgUrl(item.icon)"> -->
+            <v-icon>{{item.icon}}</v-icon>
             </v-list-item-action>
             <v-list-item-content>
               <v-list-item-title v-text="item.title" />
@@ -63,16 +61,11 @@
           <v-list-item-group
             v-model="group"
           >
-          <v-list-item>
-            <v-content>
-            <v-color-picker v-model="picker" class="ma-2" hide-inputs></v-color-picker>
-            </v-content>
-          </v-list-item>
-          <v-list-item>
+          <!-- <v-list-item>
             <v-content>
               <v-color-picker v-model="defaultColor" class="ma-2" hide-inputs></v-color-picker>
             </v-content>
-          </v-list-item>
+          </v-list-item> -->
           </v-list-item-group>
         </v-list>
 
@@ -99,9 +92,9 @@
               <CalculatorYellow/>
             </v-row>
             <v-list two-line></v-list>
-            <v-row>
+            <!-- <v-row>
               <DrawerTextArea/>
-            </v-row>
+            </v-row> -->
           </v-col>
        </v-list-item>
       </v-list>
@@ -112,9 +105,9 @@
         <v-row>
           <v-col cols="20">
             <v-row justify="space-around">
-              <div v-show="!oi" class="floating-text-area">
+              <div v-show="!globalTextArea" class="floating-text-area">
                 <v-expand-transition>
-                  <div v-show="!oi" class="mx-auto">
+                  <div v-show="!globalTextArea" class="mx-auto">
                     <v-textarea
                       solo
                       name="input-7-4"
@@ -132,323 +125,71 @@
         </v-row>
       </v-container>
     </v-content>
-
-<!-- 
-      <v-content style="margin-top: 40px;">
-        <div v-show="!oi" class="floating-text-area">
-                <v-expand-transition>
-                  <div v-show="!oi" class="mx-auto">
-                    <v-textarea
-                      solo
-                      name="input-7-4"
-                      label="Solo textarea"
-                      auto-grow
-                    ></v-textarea>
-                  </div>
-                </v-expand-transition>
-              </div>
-        <nuxt/>
-      </v-content> -->
-
-
-      <v-card-text>
-        The navigation drawer will appear from the bottom on smaller size screens.
-      </v-card-text>
     </v-content>
  
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- 
-
-        <v-navigation-drawer
-      expand-on-hover
-        absolute
-        prominent
-        >
-          <v-list>
-            <v-list-item class="px-2">
-              <v-list-item-avatar>
-                <v-img src="https://randomuser.me/api/portraits/women/85.jpg"></v-img>
-              </v-list-item-avatar>
-              <v-list-item-content>
-                <v-list-item-title >Want a site like this?</v-list-item-title>
-              </v-list-item-content>
-            </v-list-item>
-          </v-list>
-
-          <v-divider></v-divider>
-          
-          
-          <v-list
-            nav
-            dense
-          >
-            <v-list-item link>
-              <v-list-item-icon>
-                <v-icon>mdi-folder</v-icon>
-              </v-list-item-icon>
-              <v-list-item-title>My Files</v-list-item-title>
-            </v-list-item>
-            <v-list-item link>
-              <v-list-item-icon>
-                <v-icon>mdi-account-multiple</v-icon>
-              </v-list-item-icon>
-              <v-list-item-title>Shared with me</v-list-item-title>
-            </v-list-item>
-            <v-list-item link>
-              <v-list-item-icon>
-                <v-icon>alarm-on</v-icon>
-              </v-list-item-icon>
-              <v-list-item-title>business</v-list-item-title>
-            </v-list-item>
-          </v-list> 
-
-
-
-
-          <v-list>
-        <v-list-item
-          v-for="(item, i) in items"
-          :key="i"
-          :to="item.to"
-          router
-          exact
-        >
-          <v-list-item-action>
-            <img :src="getImgUrl(item.icon)">
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title v-text="item.title" />
-          </v-list-item-content>
-        </v-list-item>
-      </v-list>
-      
-
-
-        </v-navigation-drawer> 
-<nuxt/> -->
-
-
-
-
-
-
-
-        <!-- <v-content> -->
-      <!-- <v-container fluid> -->
-        <!-- <v-row>
-          <v-col cols="20">
-            <v-row justify="space-around"> -->
-              <!-- <div v-show="!oi" class="floating-text-area"> -->
-                <!-- <v-expand-transition>
-                  <div v-show="!oi" class="mx-auto">
-                    <v-textarea
-                      solo
-                      name="input-7-4"
-                      label="Solo textarea"
-                      auto-grow
-                    ></v-textarea>
-                  </div>
-                </v-expand-transition> -->
-              <!-- </div>
-              <div style="margin-top: 1%;"> -->
-                <!-- <nuxt/> -->
-              <!-- </div> -->
-            <!-- </v-row>
-          </v-col>
-        </v-row> -->
-      <!-- </v-container> -->
-    <!-- </v-content> -->
-
-
-      <!-- </v-card> -->
-
-
-
-<!--   
-    <v-navigation-drawer
-      v-model="drawer"
-      :mini-variant="miniVariant"
-      :clipped="clipped"
-      fixed
-      app
-    >
-      <v-list>
-        <v-list-item
-          v-for="(item, i) in items"
-          :key="i"
-          :to="item.to"
-          router
-          exact
-        >
-          <v-list-item-action>
-            <img :src="getImgUrl(item.icon)">
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title v-text="item.title" />
-          </v-list-item-content>
-        </v-list-item>
-      </v-list>
-    </v-navigation-drawer>
-
-
-    
-    <v-app-bar
-      :collapse="!collapseOnScroll"
-      :collapse-on-scroll="collapseOnScroll"
-      fixed
-      app
-    >
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-      <v-btn icon @click.stop="miniVariant = !miniVariant">
-        <v-icon>mdi-{{ `chevron-${miniVariant ? 'right' : 'left'}` }}</v-icon>
-      </v-btn>
-
-
-      <v-layout align-center justify-space-around>
-      </v-layout>
-
-      <v-toolbar-title v-text="title" align="center"/>
-      <v-spacer/>
-      <v-btn icon @click="oi = !oi">
-        <v-icon>fas fa-edit</v-icon>
-        {{ oi ? 'Show' : 'Hide' }}
-      </v-btn>
-      <v-btn icon @click.stop="rightDrawer = !rightDrawer">
-        <img :src="getImgUrl('calculator-variant')">
-      </v-btn>
-    </v-app-bar>
-    <v-content>
-      <v-container fluid>
-        <v-row>
-          <v-col cols="20">
-            <v-row justify="space-around">
-              <div v-show="!oi" class="floating-text-area">
-                <v-expand-transition>
-                  <div v-show="!oi" class="mx-auto">
-                    <v-textarea
-                      solo
-                      name="input-7-4"
-                      label="Solo textarea"
-                      auto-grow
-                    ></v-textarea>
-                  </div>
-                </v-expand-transition>
-              </div>
-              <div style="margin-top: 1%;">
-                <nuxt/>
-              </div>
-            </v-row>
-          </v-col>
-        </v-row>
-      </v-container>
-    </v-content>
-
-
-
-
-
-
-
-
--->
-    <!-- <v-footer
-      :fixed="fixed"
-      app
-    >
-      <span>&copy; {{ kevin + " " + new Date().getFullYear() }}</span>
-    </v-footer> -->
-
     <v-bottom-navigation
     v-model="bottomNav"
     dark
     shift
     fixed
-  >
-    <v-btn>
-      <span>Video</span>
-      <v-icon>mdi-television-play</v-icon>
+    >
+    <v-btn icon>
+      <span>Moedas</span>
+      <v-icon>mdi-checkbox-multiple-blank-circle</v-icon>
     </v-btn>
 
     <v-btn>
-      <span>Music</span>
-      <v-icon>mdi-music-note</v-icon>
+      <span>Gráficos</span>
+      <v-icon class="mdi mdi-align-vertical-bottom" ></v-icon>
     </v-btn>
 
     <v-btn>
-      <span>Book</span>
-      <v-icon>mdi-book</v-icon>
+      <span>Câmbio</span>
+      <v-icon>mdi-account-cash</v-icon>
     </v-btn>
 
     <v-btn>
-      <span>Image</span>
-      <v-icon>mdi-image</v-icon>
+      <span>Países</span>
+      <v-icon>mdi-cash-usd-outline</v-icon>
     </v-btn>
   </v-bottom-navigation>
   </v-app>
 </template>
 
 <script>
-import Equalizer from '../assets/images/equalizer.svg'
-import Calculator from '~/components/Calculator.vue'
-import CalculatorApple from '~/components/calculator/CalculatorApple.vue'
 import CalculatorYellow from '~/components/calculator/CalculatorYellow.vue'
-import DrawerTextArea from '~/components/calculator/DrawerTextArea.vue'
-import DisplayTextArea from '~/components/DisplayTextArea.vue'
-// import Theme from '~/components/Theme.vue'
 
 export default {
   components: {
-    Calculator,
-    CalculatorApple,
-    CalculatorYellow,
-    DrawerTextArea,
-    // Theme
+    CalculatorYellow
   },
   data () {
     return {
-      picker: "#ff4bf3",
-      // picker2: "#bbff4b",
-      defaultColor: "#bbff4b",
-      // purple accent-4
+      siteBarColor: "#7bff4f",
+      SiteTitle: "MEUCAMBIO.COM",
       tabs: null,
-      oi: true,
-      kevin: "MEUCAMBIO.COM",
-      collapseOnScroll: true,
-      clipped: false,
       drawer: false,
-      fixed: false,
+      globalTextArea: true,
+      right: true,
+      rightDrawer: false,
+      canada: 'calculator-variant',
       items: [
         {
-          icon: 'calculator-variant',
+          icon: 'mdi-cash-usd-outline',
           title: 'Página Inicial',
           to: '/'
         },
         {
-          icon: 'currency-usd-circle-outline',
+          icon: 'mdi-checkbox-multiple-blank-circle',
           title: 'Moedas',
           to: '/moedas'
         },
         {
-          icon: 'equalizer',
+          icon: 'mdi-align-vertical-bottom',
           title: 'Gráficos',
           to: '/graficos'
         }
       ],
-      miniVariant: false,
-      right: true,
-      rightDrawer: false,
-      title: 'MEUCAMBIO.COM',
     }
   },
   methods: {
@@ -477,9 +218,5 @@ export default {
   margin-top: 40px;
   top: 88px;
   position: sticky;
-}
-
-.space {
-  margin-top: 50px;
 }
 </style>
