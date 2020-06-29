@@ -3,9 +3,9 @@ import Router from 'vue-router'
 import { interopDefault } from './utils'
 import scrollBehavior from './router.scrollBehavior.js'
 
-const _6a278730 = () => interopDefault(import('../pages/graficos.vue' /* webpackChunkName: "pages/graficos" */))
-const _16adf215 = () => interopDefault(import('../pages/moedas.vue' /* webpackChunkName: "pages/moedas" */))
-const _0612cc40 = () => interopDefault(import('../pages/index.vue' /* webpackChunkName: "pages/index" */))
+const _554b53a8 = () => interopDefault(import('..\\pages\\graficos.vue' /* webpackChunkName: "pages_graficos" */))
+const _d26b06e6 = () => interopDefault(import('..\\pages\\moedas.vue' /* webpackChunkName: "pages_moedas" */))
+const _2a62e068 = () => interopDefault(import('..\\pages\\index.vue' /* webpackChunkName: "pages_index" */))
 
 // TODO: remove in Nuxt 3
 const emptyFn = () => {}
@@ -25,15 +25,15 @@ export const routerOptions = {
 
   routes: [{
     path: "/graficos",
-    component: _6a278730,
+    component: _554b53a8,
     name: "graficos"
   }, {
     path: "/moedas",
-    component: _16adf215,
+    component: _d26b06e6,
     name: "moedas"
   }, {
     path: "/",
-    component: _0612cc40,
+    component: _2a62e068,
     name: "index"
   }],
 

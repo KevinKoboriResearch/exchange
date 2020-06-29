@@ -2,22 +2,22 @@
   {
     "name": "graficos",
     "path": "/graficos",
-    "component": "/Users/kevinkobori/Documents/projects/exchange/src/pages/graficos.vue",
+    "component": "C:\\\\Users\\\\Usuario\\\\Documents\\\\projects\\\\exchange\\\\src\\\\pages\\\\graficos.vue",
     "chunkName": "pages/graficos",
-    "_name": "_6a278730"
+    "_name": "_554b53a8"
   },
   {
     "name": "moedas",
     "path": "/moedas",
-    "component": "/Users/kevinkobori/Documents/projects/exchange/src/pages/moedas.vue",
+    "component": "C:\\\\Users\\\\Usuario\\\\Documents\\\\projects\\\\exchange\\\\src\\\\pages\\\\moedas.vue",
     "chunkName": "pages/moedas",
-    "_name": "_16adf215"
+    "_name": "_d26b06e6"
   },
   {
     "name": "index",
     "path": "/",
-    "component": "/Users/kevinkobori/Documents/projects/exchange/src/pages/index.vue",
+    "component": "C:\\\\Users\\\\Usuario\\\\Documents\\\\projects\\\\exchange\\\\src\\\\pages\\\\index.vue",
     "chunkName": "pages/index",
-    "_name": "_0612cc40"
+    "_name": "_2a62e068"
   }
 ]

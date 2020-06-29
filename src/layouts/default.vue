@@ -49,7 +49,7 @@
             <v-icon>{{item.icon}}</v-icon>
             </v-list-item-action>
             <v-list-item-content>
-              <v-list-item-title v-text="item.title" />
+              <v-list-item-title v-text="item.drawerNavTitle" />
             </v-list-item-content>
           </v-list-item>
           </v-list-item-group>
@@ -117,7 +117,7 @@
                   </div>
                 </v-expand-transition>
               </div>
-              <div style="margin-top: 40px;">
+              <div style="margin-top: 25px; margin-bottom: 40px">
                 <nuxt/>
               </div>
             </v-row>
@@ -126,32 +126,23 @@
       </v-container>
     </v-content>
     </v-content>
- 
+
     <v-bottom-navigation
     v-model="bottomNav"
     dark
     shift
     fixed
-    >
-    <v-btn icon>
-      <span>Moedas</span>
-      <v-icon>mdi-checkbox-multiple-blank-circle</v-icon>
-    </v-btn>
-
-    <v-btn>
-      <span>Gráficos</span>
-      <v-icon class="mdi mdi-align-vertical-bottom" ></v-icon>
-    </v-btn>
-
-    <v-btn>
-      <span>Câmbio</span>
-      <v-icon>mdi-account-cash</v-icon>
-    </v-btn>
-
-    <v-btn>
-      <span>Países</span>
-      <v-icon>mdi-cash-usd-outline</v-icon>
-    </v-btn>
+     >
+      <v-btn v-for="(item, i) in items"
+        :key="i"
+        :to="item.to"
+        router
+        exact
+        icon
+      >
+        <span>{{item.bottonNavTitle}}</span>
+        <v-icon>{{item.icon}}</v-icon>
+      </v-btn>
   </v-bottom-navigation>
   </v-app>
 </template>
@@ -176,19 +167,34 @@ export default {
       items: [
         {
           icon: 'mdi-cash-usd-outline',
-          title: 'Página Inicial',
+          drawerNavTitle: 'Página Inicial',
+          bottonNavTitle: 'Home',
           to: '/'
         },
         {
           icon: 'mdi-checkbox-multiple-blank-circle',
-          title: 'Moedas',
+          drawerNavTitle: 'Moedas',
+          bottonNavTitle: 'Moedas',
           to: '/moedas'
         },
         {
           icon: 'mdi-align-vertical-bottom',
-          title: 'Gráficos',
+          drawerNavTitle: 'Gráficos',
+          bottonNavTitle: 'Gráficos',
           to: '/graficos'
-        }
+        },
+        {
+          icon: 'mdi-account-cash',
+          drawerNavTitle: 'Casas de Cambio',
+          bottonNavTitle: 'Cambio',
+          to: '/casas-de-cambio'
+        },
+        {
+          icon: 'mdi-google-maps',
+          drawerNavTitle: 'Mapas',
+          bottonNavTitle: 'Mapas',
+          to: '/mapas'
+        },
       ],
     }
   },
