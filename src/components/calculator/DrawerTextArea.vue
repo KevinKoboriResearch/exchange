@@ -1,13 +1,10 @@
 <template>
-  <!-- <v-col cols="12" sm="6"> -->
-        <v-textarea
-          filled
-          auto-grow
-          label="Two rows"
-          rows="2"
-          row-height="20"
-        ></v-textarea>
-      <!-- </v-col> -->
+  <v-textarea
+    solo
+    name="input-7-4"
+    label="Calc Notes"
+    auto-grow
+  ></v-textarea>
 </template>
 
 <script>

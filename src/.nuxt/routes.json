@@ -1,23 +1,37 @@
 [
   {
+    "name": "casasDeCambio",
+    "path": "/casasDeCambio",
+    "component": "/Users/kevinkobori/Documents/projects/exchange/src/pages/casasDeCambio.vue",
+    "chunkName": "pages/casasDeCambio",
+    "_name": "_10a583a2"
+  },
+  {
     "name": "graficos",
     "path": "/graficos",
-    "component": "C:\\\\Users\\\\Usuario\\\\Documents\\\\projects\\\\exchange\\\\src\\\\pages\\\\graficos.vue",
+    "component": "/Users/kevinkobori/Documents/projects/exchange/src/pages/graficos.vue",
     "chunkName": "pages/graficos",
-    "_name": "_554b53a8"
+    "_name": "_6a278730"
+  },
+  {
+    "name": "mapas",
+    "path": "/mapas",
+    "component": "/Users/kevinkobori/Documents/projects/exchange/src/pages/mapas.vue",
+    "chunkName": "pages/mapas",
+    "_name": "_7b49fd9c"
   },
   {
     "name": "moedas",
     "path": "/moedas",
-    "component": "C:\\\\Users\\\\Usuario\\\\Documents\\\\projects\\\\exchange\\\\src\\\\pages\\\\moedas.vue",
+    "component": "/Users/kevinkobori/Documents/projects/exchange/src/pages/moedas.vue",
     "chunkName": "pages/moedas",
-    "_name": "_d26b06e6"
+    "_name": "_16adf215"
   },
   {
     "name": "index",
     "path": "/",
-    "component": "C:\\\\Users\\\\Usuario\\\\Documents\\\\projects\\\\exchange\\\\src\\\\pages\\\\index.vue",
+    "component": "/Users/kevinkobori/Documents/projects/exchange/src/pages/index.vue",
     "chunkName": "pages/index",
-    "_name": "_2a62e068"
+    "_name": "_0612cc40"
   }
 ]

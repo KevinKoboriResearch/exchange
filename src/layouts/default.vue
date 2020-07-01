@@ -89,12 +89,12 @@
         <v-list-item class='.justify-center'>
           <v-col>
             <v-row>
-              <CalculatorYellow/>
+              <Calculator/>
             </v-row>
             <v-list two-line></v-list>
-            <!-- <v-row>
+            <v-row>
               <DrawerTextArea/>
-            </v-row> -->
+            </v-row>
           </v-col>
        </v-list-item>
       </v-list>
@@ -108,12 +108,7 @@
               <div v-show="!globalTextArea" class="floating-text-area">
                 <v-expand-transition>
                   <div v-show="!globalTextArea" class="mx-auto">
-                    <v-textarea
-                      solo
-                      name="input-7-4"
-                      label="Solo textarea"
-                      auto-grow
-                    ></v-textarea>
+                    <DrawerTextArea/>
                   </div>
                 </v-expand-transition>
               </div>
@@ -148,15 +143,17 @@
 </template>
 
 <script>
-import CalculatorYellow from '~/components/calculator/CalculatorYellow.vue'
+import Calculator from '~/components/calculator/Calculator.vue'
+import DrawerTextArea from '~/components/calculator/DrawerTextArea.vue'
 
 export default {
   components: {
-    CalculatorYellow
+    Calculator,
+    DrawerTextArea
   },
   data () {
     return {
-      siteBarColor: "#7bff4f",
+      siteBarColor: "#7bdf4f",
       SiteTitle: "MEUCAMBIO.COM",
       tabs: null,
       drawer: false,
@@ -186,7 +183,7 @@ export default {
         {
           icon: 'mdi-account-cash',
           drawerNavTitle: 'Casas de Cambio',
-          bottonNavTitle: 'Cambio',
+          bottonNavTitle: 'Câmbio',
           to: '/casas-de-cambio'
         },
         {
@@ -198,12 +195,12 @@ export default {
       ],
     }
   },
-  methods: {
-    getImgUrl(val) {
-      var images = require.context('../assets/images', false, /\.svg$/)
-      return images('./' + val + ".svg")
-    }
-  }
+  // methods: {
+  //   getImgUrl(val) {
+  //     var images = require.context('../assets/images', false, /\.svg$/)
+  //     return images('./' + val + ".svg")
+  //   }
+  // }
 }
 </script>
 
