@@ -174,17 +174,17 @@ export default {
           bottonNavTitle: 'Moedas',
           to: '/moedas'
         },
-        {
-          icon: 'mdi-align-vertical-bottom',
-          drawerNavTitle: 'Gráficos',
-          bottonNavTitle: 'Gráficos',
-          to: '/graficos'
-        },
+        // {
+        //   icon: 'mdi-align-vertical-bottom',
+        //   drawerNavTitle: 'Gráficos',
+        //   bottonNavTitle: 'Gráficos',
+        //   to: '/graficos'
+        // },
         {
           icon: 'mdi-account-cash',
           drawerNavTitle: 'Casas de Cambio',
           bottonNavTitle: 'Câmbio',
-          to: '/casas-de-cambio'
+          to: '/casasDeCambio'
         },
         {
           icon: 'mdi-google-maps',
