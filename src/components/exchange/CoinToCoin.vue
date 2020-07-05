@@ -1,5 +1,6 @@
 <template>
   <div>
+    <!-- <p> {{ apiData | json}}</p> -->
     <v-card tile flat class="pa-2">
       <v-row class="pa-2" style="flex-wrap: nowrap;">
         <v-col class="flex-grow-1 flex-shrink-0 pa-1">
@@ -25,6 +26,8 @@
           <v-select
             v-model="coinType1"
             :items="coinTypeList"
+            item-text="name"
+            item-value="code"
             solo
           ></v-select>
         </v-col>
@@ -34,11 +37,39 @@
               <v-text-field persistent-hint :hint="coinType2" label="Moeda" v-model="labelMoeda" solo clearable></v-text-field>
             </v-card>
           </v-hover>
-          <v-select
+          <!-- <v-select
+            v-model="province"
+            :items="provinces"
+            item-text="Cities.name"
+            item-value='JSON.stringify(Cities)'
+            solo
+            persistent-hint :hint="province"
+          ></v-select> -->
+          <!-- <v-select
+            v-model="province"
+            :items="test1"
+            item-text="text.name"
+            solo
+            persistent-hint :hint="province"
+          ></v-select> -->
+         <v-select
             v-model="coinType2"
             :items="coinTypeList"
+            item-text="name"
+            item-value="code"
             solo
           ></v-select>
+            <!-- :key="index" -->
+          <!-- <option :value="myOptionValue">My Option Label</option> -->
+          <!-- <v-select v-model="province">                   
+          <option v-for="(p, index) in provinces" :key="index" >{{ p.Province }}</option> -->
+          <!-- selected: {{province}}, -->
+          <!-- </v-select>  -->
+          <!-- <template :value="p" v-for="(p) in provinces">   -->
+          <!-- </template> -->
+            <!-- <select v-model="city">
+              <option v-for="(c, index) in Province.Cities" :key="index">{{ c.name }}</option>
+            </select> -->
         </v-col>
       </v-row>
     </v-card>
@@ -50,6 +81,7 @@ import axios from 'axios'
 export default {
   data() {
     return {
+      city: '',
       apiData: {},
       moeda: null,
       quotation: false,
@@ -58,24 +90,90 @@ export default {
       coinType2: 'USD',
       snackbar: false,   
       timeout: 20000,
-      coinTypeList: [
-        'BRL',
-        'USD',
-        'USDT',
-        'CAD',
-        'EUR',
-        'GBP',
-        'ARS',
-        'BTC',
-        'LTC',
-        'JPY',
-        'CHF',
-        'AUD',
-        'CNY',
-        'ILS',
-        'ETH',
-        'XRP',
+      province: "",
+
+      coinTypeList: 
+      // {
+      //   "USD": {
+      //         "name": "Fooland"
+      //       },
+      //   value: {
+      //         "name": "Fooland"
+      //       },
+      //   disabled: false,
+      //   divider: false,
+      //   header: "",
+      // },
+      [
+        {code: 'BRL', name: 'Real'},
+        {code: 'USD', name: 'Dólar Comercial'},
+        {code: 'USDT', name: 'Dólar Turismo'},
+        {code: 'CAD', name: 'Dólar Canadense'},
+        {code: 'EUR', name: 'Euro'},
+        {code: 'GBP', name: 'Libra Esterlina'},
+        {code: 'ARS', name: 'Peso Argentino'},
+        {code: 'BTC', name: 'Bitcoin'},
+        {code: 'LTC', name: 'Litecoin'},
+        {code: 'JPY', name: 'Iene Japonês'},
+        {code: 'CHF', name: 'Franco Suíço'},
+        {code: 'AUD', name: 'Dólar Australiano'},
+        {code: 'CNY', name: 'Yuan Chinês'},
+        {code: 'ILS', name: 'Novo Shekel Israelense'},
+        {code: 'ETH', name: 'Ethereum'},
+        {code: 'XRP', name: 'Ripple'},
+        // 'USDT',
+        // 'CAD',
+        // 'EUR',
+        // 'GBP',
+        // 'ARS',
+        // 'BTC',
+        // 'LTC',
+        // 'JPY',
+        // 'CHF',
+        // 'AUD',
+        // 'CNY',
+        // 'ILS',
+        // 'ETH',
+        // 'XRP',
       ],
+      test1: {
+        text: {
+              "name": "Fooland",
+              "id": "1"
+            },
+        value: {
+              "name": "Fooland"
+            },
+        disabled: false,
+        divider: false,
+        header: "",
+      },
+      // provinces: [
+      //   {
+      //     "Province": "Foo",
+      //     "Cities": [
+      //       {
+      //         "name": "Fooland"
+      //       },
+      //       {
+      //         "name": "Fooville"
+      //       }
+      //     ]
+      //   },
+      //   {"Province": "Bar",
+      //     "Cities": [
+      //       {
+      //         "name": "Barland"
+      //       },
+      //       {
+      //         "name": "Barville"
+      //       },
+      //       {
+      //         "name": "Barak"
+      //       }
+      //     ]
+      //   } 
+      // ],
     }
   },
   async mounted () {
@@ -89,7 +187,10 @@ export default {
       return this.decimal(val * val2)
     },
     decimal(val) {
-      val = val.toFixed(2)
+      var regex = /^[.,]+$/;
+      if(val.search(regex) == 1) {
+        var val = val.toFixed(2)
+      }
       return val.toString().replace(".", ",")
     }
   },
@@ -99,15 +200,24 @@ export default {
         if(this.moeda == null)
           return
         else
+        var x = 0
           if(this.quotation == true) {
             if(this.coinType1 == 'BRL') {
-              var x = this.apiData[this.coinType2]["low"] * this.moeda
+              if(this.coinType1 == this.coinType2) {
+                x = this.moeda
+              } else {
+                x = this.apiData[this.coinType2]["low"] * this.moeda
+              }
             } else {
-              var x = (this.moeda * this.apiData[this.coinType1]["low"]) / this.apiData[this.coinType2]["low"]
+              x = (this.moeda * this.apiData[this.coinType1]["low"]) / this.apiData[this.coinType2]["low"]
             }
           } else {
             if(this.coinType1 == 'BRL') {
-              var x = this.apiData[this.coinType2]["high"] * this.moeda
+              if(this.coinType1 == this.coinType2) {
+                x = this.moeda
+              } else {
+                var x = this.apiData[this.coinType2]["high"] * this.moeda
+              }
             } else {
               var x = (this.moeda * this.apiData[this.coinType1]["high"]) / this.apiData[this.coinType2]["high"]
             }
@@ -115,7 +225,7 @@ export default {
           return this.decimal(x)
       },
       set(val) {
-        var regex = /^[0-9.,]+$/;
+        // var regex = /^[0-9.,]+$/;
         if(val != null) {
           this.real = val.toString().replace(",", ".")
         } else {
@@ -128,15 +238,23 @@ export default {
          if(this.real == null)
           return
         else
+        var x = 0
           if(this.quotation == true) {
             if(this.coinType1 == 'BRL') 
-              var x = this.real / this.apiData[this.coinType2]["low"]
+              if(this.coinType1 == this.coinType2) {
+                x = this.real
+              } else {
+                x = this.real / this.apiData[this.coinType2]["low"]
+              }
             else 
-              var x = (this.real * this.apiData[this.coinType1]["low"]) / this.apiData[this.coinType2]["low"]
-            
+              x = (this.real * this.apiData[this.coinType1]["low"]) / this.apiData[this.coinType2]["low"]
           } else {
             if(this.coinType1 == 'BRL') 
-              var x = this.real / this.apiData[this.coinType2]["high"]
+              if(this.coinType1 == this.coinType2) {
+                x = this.real
+              } else {
+                x = this.apiData[this.coinType2]["low"] * this.real
+              }
              else 
               var x = (this.real * this.apiData[this.coinType1]["high"]) / this.apiData[this.coinType2]["high"]
             
@@ -144,7 +262,7 @@ export default {
           return this.decimal(x)
       },
       set(val) {
-        var regex = /^[0-9.,]+$/;
+        // var regex = /^[0-9.,]+$/;
         if(val != null) {
           this.moeda = val.toString().replace(",", ".")
         } else {
