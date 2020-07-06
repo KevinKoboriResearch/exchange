@@ -92,19 +92,7 @@ export default {
       timeout: 20000,
       province: "",
 
-      coinTypeList: 
-      // {
-      //   "USD": {
-      //         "name": "Fooland"
-      //       },
-      //   value: {
-      //         "name": "Fooland"
-      //       },
-      //   disabled: false,
-      //   divider: false,
-      //   header: "",
-      // },
-      [
+      coinTypeList: [
         {code: 'BRL', name: 'Real'},
         {code: 'USD', name: 'Dólar Comercial'},
         {code: 'USDT', name: 'Dólar Turismo'},
@@ -121,20 +109,6 @@ export default {
         {code: 'ILS', name: 'Novo Shekel Israelense'},
         {code: 'ETH', name: 'Ethereum'},
         {code: 'XRP', name: 'Ripple'},
-        // 'USDT',
-        // 'CAD',
-        // 'EUR',
-        // 'GBP',
-        // 'ARS',
-        // 'BTC',
-        // 'LTC',
-        // 'JPY',
-        // 'CHF',
-        // 'AUD',
-        // 'CNY',
-        // 'ILS',
-        // 'ETH',
-        // 'XRP',
       ],
       test1: {
         text: {
@@ -148,32 +122,6 @@ export default {
         divider: false,
         header: "",
       },
-      // provinces: [
-      //   {
-      //     "Province": "Foo",
-      //     "Cities": [
-      //       {
-      //         "name": "Fooland"
-      //       },
-      //       {
-      //         "name": "Fooville"
-      //       }
-      //     ]
-      //   },
-      //   {"Province": "Bar",
-      //     "Cities": [
-      //       {
-      //         "name": "Barland"
-      //       },
-      //       {
-      //         "name": "Barville"
-      //       },
-      //       {
-      //         "name": "Barak"
-      //       }
-      //     ]
-      //   } 
-      // ],
     }
   },
   async mounted () {
@@ -187,10 +135,10 @@ export default {
       return this.decimal(val * val2)
     },
     decimal(val) {
-      var regex = /^[.,]+$/;
-      if(val.search(regex) == 1) {
-        var val = val.toFixed(2)
-      }
+      // var regex = /^[.,]+$/;
+      // if(val.search(regex) == 1) {
+      //   var val = val.toFixed(2)
+      // }
       return val.toString().replace(".", ",")
     }
   },
@@ -201,35 +149,64 @@ export default {
           return
         else
         var x = 0
-          if(this.quotation == true) {
+          // if(this.quotation == true) {
+          //   if(this.coinType1 == 'BRL') {
+          //     if(this.coinType1 == this.coinType2) {
+          //       x = this.moeda //ok
+          //       console.log(x + " 1")
+          //     } else {
+          //       x = this.apiData[this.coinType1]["low"] * this.moeda
+          //       console.log(x + " 2")
+          //     }
+          //   } else {
+          //     x = (this.moeda * this.apiData[this.coinType1]["low"]) / this.apiData[this.coinType2]["low"] //ok
+          //     console.log(x + " 3")
+          //   }
+          // } else {
             if(this.coinType1 == 'BRL') {
               if(this.coinType1 == this.coinType2) {
                 x = this.moeda
+                console.log(x + " 4")
               } else {
-                x = this.apiData[this.coinType2]["low"] * this.moeda
+                x = this.apiData[this.coinType2]["high"] * this.moeda
+                console.log(x + " 5")
               }
-            } else {
-              x = (this.moeda * this.apiData[this.coinType1]["low"]) / this.apiData[this.coinType2]["low"]
-            }
-          } else {
-            if(this.coinType1 == 'BRL') {
+            } 
+            
+            
+
+
+
+            else if(this.coinType2 == 'BRL') {
               if(this.coinType1 == this.coinType2) {
                 x = this.moeda
+                console.log(x + " 4")
               } else {
-                var x = this.apiData[this.coinType2]["high"] * this.moeda
+                // x = this.apiData[this.coinType1]["high"] * this.moeda
+                // x= 100000000
+                x = this.moeda / this.apiData[this.coinType1]["high"]
+                console.log(x + " 5")
               }
-            } else {
-              var x = (this.moeda * this.apiData[this.coinType1]["high"]) / this.apiData[this.coinType2]["high"]
+            } 
+            
+
+            
+            
+            
+            else {
+              x = (this.moeda * this.apiData[this.coinType1]["high"]) / this.apiData[this.coinType2]["high"] //ok
+              console.log(x + " 6")
             }
-          }
+          // }
           return this.decimal(x)
       },
       set(val) {
-        // var regex = /^[0-9.,]+$/;
         if(val != null) {
           this.real = val.toString().replace(",", ".")
+          console.log(" 12")
         } else {
           this.real = null
+          console.log(" 13")
         }
       }
     },
@@ -239,34 +216,63 @@ export default {
           return
         else
         var x = 0
-          if(this.quotation == true) {
-            if(this.coinType1 == 'BRL') 
+          // if(this.quotation == true) {
+          //   if(this.coinType1 == 'BRL') 
+          //     if(this.coinType1 == this.coinType2) {
+          //       x = this.real
+          //       console.log(x + " 7")
+          //     } else {
+          //       x = this.real / this.apiData[this.coinType2]["low"]
+          //       console.log(x + " 8")
+          //     }
+          //   else 
+          //     x = (this.real * this.apiData[this.coinType2]["low"]) / this.apiData[this.coinType1]["low"]
+          // } else {
+            if(this.coinType1 == 'BRL') {
               if(this.coinType1 == this.coinType2) {
                 x = this.real
+                console.log(x + " 9")
               } else {
-                x = this.real / this.apiData[this.coinType2]["low"]
+                x = this.real / this.apiData[this.coinType2]["high"]
+                console.log(x + " 10")
               }
-            else 
-              x = (this.real * this.apiData[this.coinType1]["low"]) / this.apiData[this.coinType2]["low"]
-          } else {
-            if(this.coinType1 == 'BRL') 
+            } 
+
+
+
+
+
+            else if(this.coinType2 == 'BRL') {
               if(this.coinType1 == this.coinType2) {
                 x = this.real
+                console.log(x + " 9")
               } else {
-                x = this.apiData[this.coinType2]["low"] * this.real
+                // x = this.apiData[this.coinType1]["high"] / this.moeda
+                x= 90000000
+                x = x = this.apiData[this.coinType1]["high"] * this.real
+                console.log(x + " 10")
               }
-             else 
-              var x = (this.real * this.apiData[this.coinType1]["high"]) / this.apiData[this.coinType2]["high"]
+            } 
             
-          }
+
+
+
+
+            
+            else { 
+              x = (this.real * this.apiData[this.coinType2]["high"]) / this.apiData[this.coinType1]["high"]
+              console.log(x + " 11")
+            }
+          // }
           return this.decimal(x)
       },
       set(val) {
-        // var regex = /^[0-9.,]+$/;
         if(val != null) {
           this.moeda = val.toString().replace(",", ".")
+          console.log(" 14")
         } else {
           this.moeda = null
+          console.log(" 15")
         }
       }
     }
