@@ -1,26 +1,39 @@
 <template>
   <div>
     <!-- <p> {{ apiData | json}}</p> -->
+    <p>{{cotacao}}</p>
     <v-card tile flat class="pa-2">
       <v-row class="pa-2" style="flex-wrap: nowrap;">
         <v-col class="flex-grow-1 flex-shrink-0 pa-1">
           <v-hover v-slot:default="{ hover }">
-            <div @click="quotation = !quotation">
+            <!-- <div @click="quotation = !quotation"> -->
               <v-card :elevation="hover ? 8 : 0" tile color="amber darken-1">
-                <v-text-field persistent-hint :hint="quotation ? 'Mínimo' : 'Máximo'" :label="quotation ? 'Máximo' : 'Mínimo'" solo disabled class="black--text"></v-text-field>
+                <v-text-field v-model="cotacao"
+                persistent-hint :hint="cotacao"
+                solo disabled class="black--text"></v-text-field>
               </v-card>
+          </v-hover>
+                <!-- persistent-hint :hint="quotation ? 'Mínimo' : 'Máximo'" :label="quotation ? 'Máximo' : 'Mínimo'" :value="quotation"  -->
               <!-- <v-select
                 v-model="coinType2"
                 :items="coinTypeList"
                 solo
               ></v-select> -->
-            </div>
-          </v-hover>
+              <v-select
+                v-model="cotacao"
+                :items="cotacaoList"
+                item-text="name"
+                item-value="code"
+                solo
+                tile
+              ></v-select>
+            <!-- </div> -->
+          <!-- </v-hover> -->
         </v-col>
         <v-col class="flex-grow-1 flex-shrink-0 pa-1">
           <v-hover v-slot:default="{ hover }">
             <v-card :elevation="hover ? 8 : 0" tile color="amber darken-1">
-              <v-text-field persistent-hint :hint="coinType1" label="R$" v-model="labelReal" solo clearable></v-text-field>
+              <v-text-field persistent-hint :hint="coinType1" :label="coinTypeList.code" v-model="labelReal" solo clearable></v-text-field>
             </v-card>
           </v-hover>
           <v-select
@@ -91,7 +104,11 @@ export default {
       snackbar: false,   
       timeout: 20000,
       province: "",
-
+      cotacao: "high",
+      cotacaoList: [
+        {code: 'high', name: 'Máxima'},
+        {code: 'low', name: 'Mínima'},
+      ],
       coinTypeList: [
         {code: 'BRL', name: 'Real'},
         {code: 'USD', name: 'Dólar Comercial'},
@@ -145,7 +162,7 @@ export default {
   computed: {
     labelReal: {
       get() {
-        if(this.moeda == null)
+        if(this.moeda == null || this.moeda == 0)
           return
         else
         var x = 0
@@ -163,14 +180,13 @@ export default {
           //     console.log(x + " 3")
           //   }
           // } else {
-            if(this.coinType1 == 'BRL') {
-              if(this.coinType1 == this.coinType2) {
-                x = this.moeda
-                console.log(x + " 4")
-              } else {
+            if(this.coinType1 == this.coinType2) {
+              x = this.moeda
+              console.log(x + " 9")
+            }
+            else if(this.coinType1 == 'BRL') {
                 x = this.apiData[this.coinType2]["high"] * this.moeda
                 console.log(x + " 5")
-              }
             } 
             
             
@@ -182,8 +198,6 @@ export default {
                 x = this.moeda
                 console.log(x + " 4")
               } else {
-                // x = this.apiData[this.coinType1]["high"] * this.moeda
-                // x= 100000000
                 x = this.moeda / this.apiData[this.coinType1]["high"]
                 console.log(x + " 5")
               }
@@ -212,7 +226,7 @@ export default {
     },
     labelMoeda: {
       get() {
-         if(this.real == null)
+         if(this.real == null || this.real == 0)
           return
         else
         var x = 0
@@ -228,14 +242,15 @@ export default {
           //   else 
           //     x = (this.real * this.apiData[this.coinType2]["low"]) / this.apiData[this.coinType1]["low"]
           // } else {
-            if(this.coinType1 == 'BRL') {
-              if(this.coinType1 == this.coinType2) {
-                x = this.real
-                console.log(x + " 9")
-              } else {
+
+
+            if(this.coinType1 == this.coinType2) {
+              x = this.real
+              console.log(x + " 9")
+            }
+            else if(this.coinType1 == 'BRL') {
                 x = this.real / this.apiData[this.coinType2]["high"]
                 console.log(x + " 10")
-              }
             } 
 
 
@@ -243,15 +258,8 @@ export default {
 
 
             else if(this.coinType2 == 'BRL') {
-              if(this.coinType1 == this.coinType2) {
-                x = this.real
-                console.log(x + " 9")
-              } else {
-                // x = this.apiData[this.coinType1]["high"] / this.moeda
-                x= 90000000
-                x = x = this.apiData[this.coinType1]["high"] * this.real
-                console.log(x + " 10")
-              }
+              x = this.apiData[this.coinType1]["high"] * this.real
+              console.log(x + " 10")
             } 
             
 
@@ -263,7 +271,6 @@ export default {
               x = (this.real * this.apiData[this.coinType2]["high"]) / this.apiData[this.coinType1]["high"]
               console.log(x + " 11")
             }
-          // }
           return this.decimal(x)
       },
       set(val) {

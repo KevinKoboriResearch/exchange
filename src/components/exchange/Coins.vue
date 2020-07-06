@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p> {{ apiData | json}} </p>
+    <!-- <p> {{ apiData | json}} </p> -->
     <v-card tile flat class="pa-2">
       <v-row class="pa-2" style="flex-wrap: nowrap;">
         <v-col class="flex-grow-1 flex-shrink-0 pa-1">
@@ -84,9 +84,9 @@ export default {
       real: null,
     }
   },
-  // async mounted () {
-  //   await axios.get('https://economia.awesomeapi.com.br/json/all').then(response => (this.apiData = response.data))
-  // },
+  async mounted () {
+    await axios.get('https://economia.awesomeapi.com.br/json/all').then(response => (this.apiData = response.data))
+  },
   methods: {
     div(val, val2) {
       return this.decimal(val / val2)
