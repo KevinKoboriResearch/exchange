@@ -2,8 +2,7 @@
     <v-app>
       <v-content>
       <v-system-bar :color="picker"></v-system-bar>
-      <v-app-bar :color="siteBarColor" fixed 
-      >
+      <v-app-bar :color="siteBarColor" fixed>
       <!-- light -->
         <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
         &nbsp;&nbsp;&nbsp;
@@ -93,7 +92,13 @@
             </v-row>
             <v-list two-line></v-list>
             <v-row>
-              <DrawerTextArea/>
+              <v-textarea
+                solo
+                name="input-7-4"
+                label="Calc Notes"
+                auto-grow
+                v-model="calcArea"
+              ></v-textarea>
             </v-row>
           </v-col>
        </v-list-item>
@@ -108,7 +113,13 @@
               <div v-show="!globalTextArea" class="floating-text-area">
                 <v-expand-transition>
                   <div v-show="!globalTextArea" class="mx-auto">
-                    <DrawerTextArea/>
+                    <v-textarea
+                      solo
+                      name="input-7-4"
+                      label="Calc Notes"
+                      auto-grow
+                      v-model="calcArea"
+                    ></v-textarea>
                   </div>
                 </v-expand-transition>
               </div>
@@ -144,15 +155,14 @@
 
 <script>
 import Calculator from '~/components/calculator/Calculator.vue'
-import DrawerTextArea from '~/components/calculator/DrawerTextArea.vue'
 
 export default {
   components: {
-    Calculator,
-    DrawerTextArea
+    Calculator
   },
   data () {
     return {
+      calcArea: "",
       siteBarColor: "#7bdf4f",
       SiteTitle: "MEUCAMBIO.COM",
       tabs: null,

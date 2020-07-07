@@ -1,88 +1,34 @@
 <template>
   <div>
-    <!-- <p> {{ apiData | json}}</p> -->
-    <p>{{cotacao}}</p>
     <v-card tile flat class="pa-2">
       <v-row class="pa-2" style="flex-wrap: nowrap;">
         <v-col class="flex-grow-1 flex-shrink-0 pa-1">
-          <v-hover v-slot:default="{ hover }">
-            <!-- <div @click="quotation = !quotation"> -->
-              <v-card :elevation="hover ? 8 : 0" tile color="amber darken-1">
-                <v-text-field v-model="cotacao"
-                persistent-hint :hint="cotacao"
-                solo disabled class="black--text"></v-text-field>
-              </v-card>
-          </v-hover>
-                <!-- persistent-hint :hint="quotation ? 'Mínimo' : 'Máximo'" :label="quotation ? 'Máximo' : 'Mínimo'" :value="quotation"  -->
-              <!-- <v-select
-                v-model="coinType2"
-                :items="coinTypeList"
-                solo
-              ></v-select> -->
-              <v-select
-                v-model="cotacao"
-                :items="cotacaoList"
-                item-text="name"
-                item-value="code"
-                solo
-                tile
-              ></v-select>
-            <!-- </div> -->
-          <!-- </v-hover> -->
+          <!-- <v-hover v-slot:default="{ hover }">
+              <v-card :elevation="hover ? 8 : 0" tile color="#7bdf4f"> -->
+                <v-text-field persistent-hint :hint="cotacao" label="Cotação" solo dense disabled class="black--text"></v-text-field>
+              <!-- </v-card>
+          </v-hover> -->
+              <v-select v-model="cotacao" :items="cotacaoList" item-text="name" item-value="code" solo dense tile></v-select>
         </v-col>
+      </v-row>
+      <v-row class="pa-2" style="flex-wrap: nowrap;">
         <v-col class="flex-grow-1 flex-shrink-0 pa-1">
-          <v-hover v-slot:default="{ hover }">
-            <v-card :elevation="hover ? 8 : 0" tile color="amber darken-1">
-              <v-text-field persistent-hint :hint="coinType1" :label="coinTypeList.code" v-model="labelReal" solo clearable></v-text-field>
-            </v-card>
-          </v-hover>
-          <v-select
-            v-model="coinType1"
-            :items="coinTypeList"
-            item-text="name"
-            item-value="code"
-            solo
-          ></v-select>
+          <!-- <v-hover v-slot:default="{ hover }">
+            <v-card :elevation="hover ? 8 : 0" tile color="amber darken-1"> -->
+              <v-text-field persistent-hint :hint="coinType1" v-model="labelReal" :label="getCoinTypeListlabel(coinType1)" solo dense clearable></v-text-field>
+            <!-- </v-card>
+          </v-hover> -->
+          <!-- <v-card :elevation="hover ? 8 : 0" tile color="amber darken-1"> -->
+            <v-select hide-details v-model="coinType1" :items="coinTypeList" item-text="name" item-value="code" solo dense></v-select>
+          <!-- </v-card> -->
         </v-col>
         <v-col class="flex-grow-1 flex-shrink-0 pa-1" >
-          <v-hover v-slot:default="{ hover }">
-            <v-card :elevation="hover ? 8 : 0" tile color="amber darken-1">
-              <v-text-field persistent-hint :hint="coinType2" label="Moeda" v-model="labelMoeda" solo clearable></v-text-field>
-            </v-card>
-          </v-hover>
-          <!-- <v-select
-            v-model="province"
-            :items="provinces"
-            item-text="Cities.name"
-            item-value='JSON.stringify(Cities)'
-            solo
-            persistent-hint :hint="province"
-          ></v-select> -->
-          <!-- <v-select
-            v-model="province"
-            :items="test1"
-            item-text="text.name"
-            solo
-            persistent-hint :hint="province"
-          ></v-select> -->
-         <v-select
-            v-model="coinType2"
-            :items="coinTypeList"
-            item-text="name"
-            item-value="code"
-            solo
-          ></v-select>
-            <!-- :key="index" -->
-          <!-- <option :value="myOptionValue">My Option Label</option> -->
-          <!-- <v-select v-model="province">                   
-          <option v-for="(p, index) in provinces" :key="index" >{{ p.Province }}</option> -->
-          <!-- selected: {{province}}, -->
-          <!-- </v-select>  -->
-          <!-- <template :value="p" v-for="(p) in provinces">   -->
-          <!-- </template> -->
-            <!-- <select v-model="city">
-              <option v-for="(c, index) in Province.Cities" :key="index">{{ c.name }}</option>
-            </select> -->
+          <!-- <v-hover v-slot:default="{ hover }">
+            <v-card :elevation="hover ? 8 : 0" tile color="#7bdf4f"> -->
+              <v-text-field persistent-hint :hint="coinType2" v-model="labelMoeda" :label="getCoinTypeListlabel(coinType2)" solo dense clearable></v-text-field>
+            <!-- </v-card>
+          </v-hover> -->
+         <v-select v-model="coinType2" :items="coinTypeList" item-text="name" item-value="code" solo dense></v-select>
         </v-col>
       </v-row>
     </v-card>
@@ -94,6 +40,8 @@ import axios from 'axios'
 export default {
   data() {
     return {
+      varReal: 0,
+      varMoeda: 0,
       city: '',
       apiData: {},
       moeda: null,
@@ -110,35 +58,23 @@ export default {
         {code: 'low', name: 'Mínima'},
       ],
       coinTypeList: [
-        {code: 'BRL', name: 'Real'},
-        {code: 'USD', name: 'Dólar Comercial'},
-        {code: 'USDT', name: 'Dólar Turismo'},
-        {code: 'CAD', name: 'Dólar Canadense'},
-        {code: 'EUR', name: 'Euro'},
-        {code: 'GBP', name: 'Libra Esterlina'},
-        {code: 'ARS', name: 'Peso Argentino'},
-        {code: 'BTC', name: 'Bitcoin'},
-        {code: 'LTC', name: 'Litecoin'},
-        {code: 'JPY', name: 'Iene Japonês'},
-        {code: 'CHF', name: 'Franco Suíço'},
-        {code: 'AUD', name: 'Dólar Australiano'},
-        {code: 'CNY', name: 'Yuan Chinês'},
-        {code: 'ILS', name: 'Novo Shekel Israelense'},
-        {code: 'ETH', name: 'Ethereum'},
-        {code: 'XRP', name: 'Ripple'},
+        {code: 'BRL', currency: "R$", name: 'Real'},
+        {code: 'USD', currency: "US$", name: 'Dólar Comercial'},
+        {code: 'USDT', currency: "US$", name: 'Dólar Turismo'},
+        {code: 'CAD', currency: "C$", name: 'Dólar Canadense'},
+        {code: 'EUR', currency: "€", name: 'Euro'},
+        {code: 'GBP', currency: "teste", name: 'Libra Esterlina'},
+        {code: 'ARS', currency: "$", name: 'Peso Argentino'},
+        {code: 'BTC', currency: "teste", name: 'Bitcoin'},
+        {code: 'LTC', currency: "teste", name: 'Litecoin'},
+        {code: 'JPY', currency: "¥", name: 'Iene Japonês'},
+        {code: 'CHF', currency: "Fr", name: 'Franco Suíço'},
+        {code: 'AUD', currency: "teste", name: 'Dólar Australiano'},
+        {code: 'CNY', currency: "teste", name: 'Yuan Chinês'},
+        {code: 'ILS', currency: "₪", name: 'Novo Shekel Israelense'},
+        {code: 'ETH', currency: "teste", name: 'Ethereum'},
+        {code: 'XRP', currency: "teste", name: 'Ripple'},
       ],
-      test1: {
-        text: {
-              "name": "Fooland",
-              "id": "1"
-            },
-        value: {
-              "name": "Fooland"
-            },
-        disabled: false,
-        divider: false,
-        header: "",
-      },
     }
   },
   async mounted () {
@@ -153,10 +89,28 @@ export default {
     },
     decimal(val) {
       // var regex = /^[.,]+$/;
-      // if(val.search(regex) == 1) {
-      //   var val = val.toFixed(2)
-      // }
+      if(this.coinType1 != this.coinType2) {
+        val = val.toFixed(2)
+      }
       return val.toString().replace(".", ",")
+    },
+    getCoinTypeListlabel(val) {
+      if(val == 'BRL') {
+        return 'R$'
+      } else {
+        return 'MOEDA'
+      }
+      // function getCountryByCode(val) {
+      //   return coinTypeList.filter(
+      //       function(coinTypeList){ return code == val }
+      //   );
+      // }
+      // var found = getCountryByCode('DZ');
+
+      // var result = coinTypeList.filter(function (val) {
+      //   return val.coinTypeList.code === "BRL";
+      // })[0].coinTypeList.name;
+      // return result
     }
   },
   computed: {
@@ -165,28 +119,14 @@ export default {
         if(this.moeda == null || this.moeda == 0)
           return
         else
-        var x = 0
-          // if(this.quotation == true) {
-          //   if(this.coinType1 == 'BRL') {
-          //     if(this.coinType1 == this.coinType2) {
-          //       x = this.moeda //ok
-          //       console.log(x + " 1")
-          //     } else {
-          //       x = this.apiData[this.coinType1]["low"] * this.moeda
-          //       console.log(x + " 2")
-          //     }
-          //   } else {
-          //     x = (this.moeda * this.apiData[this.coinType1]["low"]) / this.apiData[this.coinType2]["low"] //ok
-          //     console.log(x + " 3")
-          //   }
-          // } else {
+        // var x = 0
             if(this.coinType1 == this.coinType2) {
-              x = this.moeda
-              console.log(x + " 9")
+              this.varReal = this.moeda
+              console.log(this.varReal + " 1") //ok
             }
             else if(this.coinType1 == 'BRL') {
-                x = this.apiData[this.coinType2]["high"] * this.moeda
-                console.log(x + " 5")
+                this.varReal = this.apiData[this.coinType2][this.cotacao] * this.moeda
+                console.log(this.varReal + " 2") //ok
             } 
             
             
@@ -194,13 +134,9 @@ export default {
 
 
             else if(this.coinType2 == 'BRL') {
-              if(this.coinType1 == this.coinType2) {
-                x = this.moeda
-                console.log(x + " 4")
-              } else {
-                x = this.moeda / this.apiData[this.coinType1]["high"]
-                console.log(x + " 5")
-              }
+                this.varReal = this.moeda / this.apiData[this.coinType1][this.cotacao]
+                // this.varMoeda = this.moeda / this.apiData[this.coinType1][this.cotacao]
+                console.log(this.varReal + " 3")
             } 
             
 
@@ -208,11 +144,12 @@ export default {
             
             
             else {
-              x = (this.moeda * this.apiData[this.coinType1]["high"]) / this.apiData[this.coinType2]["high"] //ok
-              console.log(x + " 6")
+              this.varReal = (this.moeda * this.apiData[this.coinType1][this.cotacao]) / this.apiData[this.coinType2][this.cotacao] //ok
+              // this.varMoeda = this.moeda
+              console.log(this.varReal + " 4") //ok
             }
           // }
-          return this.decimal(x)
+          return this.decimal(this.varReal)
       },
       set(val) {
         if(val != null) {
@@ -229,28 +166,14 @@ export default {
          if(this.real == null || this.real == 0)
           return
         else
-        var x = 0
-          // if(this.quotation == true) {
-          //   if(this.coinType1 == 'BRL') 
-          //     if(this.coinType1 == this.coinType2) {
-          //       x = this.real
-          //       console.log(x + " 7")
-          //     } else {
-          //       x = this.real / this.apiData[this.coinType2]["low"]
-          //       console.log(x + " 8")
-          //     }
-          //   else 
-          //     x = (this.real * this.apiData[this.coinType2]["low"]) / this.apiData[this.coinType1]["low"]
-          // } else {
-
-
+        // var x = 0
             if(this.coinType1 == this.coinType2) {
-              x = this.real
-              console.log(x + " 9")
+              this.varMoeda = this.real
+              console.log(this.varMoeda + " 5") //ok
             }
             else if(this.coinType1 == 'BRL') {
-                x = this.real / this.apiData[this.coinType2]["high"]
-                console.log(x + " 10")
+                this.varMoeda = this.real / this.apiData[this.coinType2][this.cotacao]
+                console.log(this.varMoeda + " 6") //ok
             } 
 
 
@@ -258,8 +181,9 @@ export default {
 
 
             else if(this.coinType2 == 'BRL') {
-              x = this.apiData[this.coinType1]["high"] * this.real
-              console.log(x + " 10")
+              this.varMoeda = this.apiData[this.coinType1][this.cotacao] * this.real
+              // this.varReal = this.apiData[this.coinType1][this.cotacao] * this.real
+              console.log(this.varMoeda + " 7")
             } 
             
 
@@ -268,10 +192,11 @@ export default {
 
             
             else { 
-              x = (this.real * this.apiData[this.coinType2]["high"]) / this.apiData[this.coinType1]["high"]
-              console.log(x + " 11")
+              this.varMoeda = (this.real * this.apiData[this.coinType2][this.cotacao]) / this.apiData[this.coinType1][this.cotacao]
+              // this.varReal = this.real
+              console.log(this.varMoeda + " 8")
             }
-          return this.decimal(x)
+          return this.decimal(this.varMoeda)
       },
       set(val) {
         if(val != null) {

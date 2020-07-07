@@ -94,10 +94,10 @@ export default {
     mult(val, val2) {
       return this.decimal(val * val2)
     },
-    decimal(value) {
-      value = value.toFixed(2)
-      value = value.toString().replace(".", ",")
-      return value
+    decimal(val) {
+      val = val.toFixed(2)
+      val = val.toString().replace(".", ",")
+      return val
     }
   },
   computed: {
@@ -135,10 +135,10 @@ export default {
     }
   },
   filters: {
-    currencydecimal(value) {
-      value = value.toFixed(2)
-      value = value.toString().replace(".", ",")
-      return value
+    currencydecimal(val) {
+      val = val.toFixed(2)
+      val = val.toString().replace(".", ",")
+      return val
     },
   }
 }
