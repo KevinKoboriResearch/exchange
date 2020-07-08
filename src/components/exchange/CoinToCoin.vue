@@ -1,49 +1,54 @@
 <template>
   <div>
-    <!-- <p> {{ this.apiData | json }} </p> -->
-    <v-card tile flat class="pa-2">
+<!-- <div class="flex-grow-1 flex-shrink-0 pa-1"> -->
+  <!-- <v-card tile flat class="pa-2" color="pink"> -->
+    <!-- <v-card tile flat class="pa-2" color="#263238"> -->
       <v-row class="pa-2" style="flex-wrap: nowrap;">
         <v-col class="flex-grow-1 flex-shrink-0 pa-1">
           <div @click="unique = true">
-          <v-hover v-slot:default="{ hover }">
-            <v-card :elevation="hover ? 8 : 0" tile color="amber darken-1">
-              <v-text-field persistent-hint :hint="coinType1" v-model="labelReal" :label="getCoinTypeListlabel(coinType1)" solo clearable>
-<!-- :clearable="clearReal" -->
-              </v-text-field>
+            <v-hover v-slot:default="{ hover }">
+              <v-card :elevation="hover ? 8 : 0" tile color="amber darken-1">
+                <v-text-field persistent-hint :hint="coinType1" v-model="labelReal" :label="getCoinTypeListlabel(coinType1)" solo loading color="amber darken-1" clearable>
+                </v-text-field>
+              </v-card>
+            </v-hover>
+            <v-card>
+              <v-select hide-details v-model="coinType1" :items="coinTypeList" item-text="name" item-value="code" solo loading color="amber darken-1"></v-select>
             </v-card>
-          </v-hover>
-          <v-card tile>
-            <v-select hide-details v-model="coinType1" :items="coinTypeList" item-text="name" item-value="code" solo></v-select>
-          </v-card>
-          </div>
-        </v-col>
-        <v-col class="flex-grow-1 flex-shrink-0 pa-1" >
-          <div @click="unique = false">
-          <v-hover v-slot:default="{ hover }">
-            <v-card :elevation="hover ? 8 : 0" tile color="amber darken-1">
-              <v-text-field persistent-hint :hint="coinType2" v-model="labelMoeda" :label="getCoinTypeListlabel(coinType2)" solo clearable></v-text-field>
-            </v-card>
-          </v-hover>
-          <v-card tile>
-         <v-select hide-details v-model="coinType2" :items="coinTypeList" item-text="name" item-value="code" solo></v-select>
-          </v-card>
           </div>
         </v-col>
       </v-row>
+      <v-row class="pa-2" style="flex-wrap: nowrap;">
+        <v-col class="flex-grow-1 flex-shrink-0 pa-1" >
+          <div @click="unique = false">
+            <v-hover v-slot:default="{ hover }">
+              <v-card :elevation="hover ? 8 : 0" tile color="#7bdf4f">
+                <v-text-field persistent-hint :hint="coinType2" v-model="labelMoeda" :label="getCoinTypeListlabel(coinType2)" solo loading  color="#7bdf4f" clearable></v-text-field>
+              </v-card>
+            </v-hover>
+            <v-card>
+              <v-select hide-details v-model="coinType2" :items="coinTypeList" item-text="name" item-value="code" solo loading color="#7bdf4f"></v-select>
+            </v-card>
+          </div>
+        </v-col>
+      </v-row>
+      <!-- <v-spacer/> -->
       <!-- <v-row class="pa-2" style="flex-wrap: nowrap;">
         <v-col class="flex-grow-1 flex-shrink-0 pa-1">
           <v-hover v-slot:default="{ hover }">
-              <v-card :elevation="hover ? 8 : 0" tile color="#7bdf4f">
-                <v-text-field persistent-hint :hint="cotacao" label="Cotação" solo dense disabled class="black--text"></v-text-field>
-              </v-card>
+            <v-card :elevation="hover ? 8 : 0" tile color="#7bdf4f">
+              <v-text-field persistent-hint :hint="cotacao" label="Cotação" solo dense disabled class="black--text"></v-text-field>
+            </v-card>
           </v-hover>
           <v-card tile>
-              <v-select hide-details v-model="cotacao" :items="cotacaoList" item-text="name" item-value="code" solo dense tile></v-select>
+            <v-select hide-details v-model="cotacao" :items="cotacaoList" item-text="name" item-value="code" solo dense tile></v-select>
           </v-card>
         </v-col>
       </v-row> -->
-    </v-card>
-  </div>
+    <!-- </v-card> -->
+  <!-- </v-card> -->
+  <!-- </div> -->
+</div>
 </template>
 
 <script>
@@ -51,7 +56,6 @@ import axios from 'axios'
 export default {
   data() {
     return {
-      unique: null,
       apiData: {},
       real: null,
       moeda: null,
@@ -61,6 +65,7 @@ export default {
       coinType2: 'USD',
       quotation: false,
       cotacao: "low",
+      unique: null,
       cotacaoList: [
         {code: 'high', name: 'Máxima'},
         {code: 'low', name: 'Mínima'},
@@ -89,15 +94,8 @@ export default {
     await axios.get('https://economia.awesomeapi.com.br/json/all').then(response => (this.apiData = response.data))
   },
   methods: {
-    // div(val, val2) {
-    //   return this.decimal(val / val2)
-    // },
-    // mult(val, val2) {
-    //   return this.decimal(val * val2)
-    // },
     decimal(val) {
-      if(this.coinType1 != this.coinType2 && this.coinType1 != 'BTC' && this.coinType1 != 'LTC' && this.coinType1 != 'ETH' 
-      && this.coinType2 != 'BTC' && this.coinType2 != 'LTC' && this.coinType2 != 'ETH') {
+      if(this.coinType1 != this.coinType2 && this.coinType1 != 'BTC' && this.coinType1 != 'LTC' && this.coinType1 != 'ETH' && this.coinType2 != 'BTC' && this.coinType2 != 'LTC' && this.coinType2 != 'ETH') {
         val = val.toFixed(2)
       }
       return val.toString().replace(".", ",")
@@ -120,21 +118,16 @@ export default {
             this.varReal = this.moeda / this.apiData[this.coinType1][this.cotacao]
           else
             this.varReal = (this.moeda * this.apiData[this.coinType1][this.cotacao]) / this.apiData[this.coinType2][this.cotacao]
-        if(this.unique == false) {
+        if(this.unique == false)
           return this.decimal(this.varReal)   
-        } else {
-          // this.real = this.varReal
-          // this.varReal = this.decimal(this.varReal)
-          // return this.varReal
+        else
           return this.varReal = this.decimal(this.real = this.varReal)
-        }
       },
       set(val) {
-        if(val != null) {
+        if(val != null)
           this.real = val.toString().replace(",", ".")
-        } else {
+        else
           this.real = null
-        }
       }
     },
     labelMoeda: {
@@ -150,27 +143,18 @@ export default {
             this.varMoeda = this.apiData[this.coinType1][this.cotacao] * this.real
           else 
             this.varMoeda = (this.real * this.apiData[this.coinType2][this.cotacao]) / this.apiData[this.coinType1][this.cotacao]
-        if(this.unique == true) {
+        if(this.unique == true)
           return this.decimal(this.varMoeda)         
-        } else {
-          // this.moeda = this.varMoeda
-          // this.varMoeda = this.decimal(this.varMoeda)
-          // return this.varMoeda
+        else
           return this.varMoeda = this.decimal(this.moeda = this.varMoeda)
-        }
       },
       set(val) {
-        if(val != null) {
+        if(val != null)
           this.moeda = val.toString().replace(",", ".")
-        } else {
+        else
           this.moeda = null
-        }
       }
     }
   }
 }
 </script>
-
-<style>
-
-</style>

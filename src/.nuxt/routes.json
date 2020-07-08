@@ -3,35 +3,30 @@
     "name": "casasDeCambio",
     "path": "/casasDeCambio",
     "component": "/Users/kevinkobori/Documents/projects/exchange/src/pages/casasDeCambio.vue",
-    "chunkName": "pages/casasDeCambio",
-    "_name": "_10a583a2"
+    "chunkName": "pages/casasDeCambio"
   },
   {
     "name": "graficos",
     "path": "/graficos",
     "component": "/Users/kevinkobori/Documents/projects/exchange/src/pages/graficos.vue",
-    "chunkName": "pages/graficos",
-    "_name": "_6a278730"
+    "chunkName": "pages/graficos"
   },
   {
     "name": "mapas",
     "path": "/mapas",
     "component": "/Users/kevinkobori/Documents/projects/exchange/src/pages/mapas.vue",
-    "chunkName": "pages/mapas",
-    "_name": "_7b49fd9c"
+    "chunkName": "pages/mapas"
   },
   {
     "name": "moedas",
     "path": "/moedas",
     "component": "/Users/kevinkobori/Documents/projects/exchange/src/pages/moedas.vue",
-    "chunkName": "pages/moedas",
-    "_name": "_16adf215"
+    "chunkName": "pages/moedas"
   },
   {
     "name": "index",
     "path": "/",
     "component": "/Users/kevinkobori/Documents/projects/exchange/src/pages/index.vue",
-    "chunkName": "pages/index",
-    "_name": "_0612cc40"
+    "chunkName": "pages/index"
   }
 ]

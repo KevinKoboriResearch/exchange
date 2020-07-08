@@ -1,7 +1,8 @@
 <template>
   <div>
     <!-- <p> {{ apiData | json}} </p> -->
-    <v-card tile flat class="pa-2">
+  <!-- <v-card tile flat class="pa-2" color="white"> -->
+    <!-- <v-card tile flat class="pa-2"> -->
       <v-row class="pa-2" style="flex-wrap: nowrap;">
         <v-col class="flex-grow-1 flex-shrink-0 pa-1">
           <v-hover v-slot:default="{ hover }">
@@ -27,8 +28,8 @@
         </v-hover>
         </v-col>
       </v-row>
-    </v-card>
-    <v-card v-for="coin in apiData" :key="coin" tile flat class="pa-2">
+    <!-- </v-card> -->
+    <div v-for="coin in apiData" :key="coin">
       <v-row class="pa-2">
         <v-col class="flex-grow-1 flex-shrink-0 pa-1">
           <div v-if="quotation == true">
@@ -69,7 +70,8 @@
           </div>
         </v-col>
       </v-row>
-    </v-card>
+    </div>
+  <!-- </v-card> -->
   </div>
 </template>
 
