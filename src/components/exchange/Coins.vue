@@ -2,13 +2,13 @@
   <div>
     <!-- <p> {{ apiData | json}} </p> -->
   <!-- <v-card tile flat class="pa-2" color="white"> -->
-    <!-- <v-card tile flat class="pa-2"> -->
+    <v-card tile class="pa-2">
       <v-row class="pa-2" style="flex-wrap: nowrap;">
         <v-col class="flex-grow-1 flex-shrink-0 pa-1">
           <v-hover v-slot:default="{ hover }">
             <div @click="quotation = !quotation">
               <v-card :elevation="hover ? 8 : 0" tile color="amber darken-1">
-                <v-text-field persistent-hint :hint="quotation ? 'Mínimo' : 'Máximo'" :label="quotation ? 'Máximo' : 'Mínimo'" solo disabled class="black--text"></v-text-field>
+                <v-text-field persistent-hint :hint="quotation ? 'Máximo' : 'Mínimo'" :label="quotation ? 'Mínimo' : 'Máximo'" solo disabled class="black--text"></v-text-field>
               </v-card>
             </div>
           </v-hover>
@@ -71,7 +71,7 @@
         </v-col>
       </v-row>
     </div>
-  <!-- </v-card> -->
+  </v-card>
   </div>
 </template>
 
