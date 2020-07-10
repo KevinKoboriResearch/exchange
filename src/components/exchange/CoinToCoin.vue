@@ -1,5 +1,6 @@
 <template>
   <div>
+    <p> {{ valor | dinheiro}} </p>
 <!-- <div class="flex-grow-1 flex-shrink-0 pa-1"> -->
   <!-- <v-card tile flat class="pa-2" color="pink"> -->
     <!-- <v-card tile flat class="pa-2" color="#263238"> -->
@@ -56,6 +57,7 @@ import axios from 'axios'
 export default {
   data() {
     return {
+      valor: 100,
       apiData: {},
       real: null,
       moeda: null,
@@ -102,6 +104,9 @@ export default {
     },
     getCoinTypeListlabel(val) {
       return this.coinTypeList.find(x => x.code === val).currency
+    },
+    dinheiroReal(valor) {
+	    return `R$ ${parseFloat(valor).toFixed(2)}`.replace('.', ',')
     }
   },
   computed: {
@@ -119,8 +124,10 @@ export default {
           else
             this.varReal = (this.moeda * this.apiData[this.coinType1][this.cotacao]) / this.apiData[this.coinType2][this.cotacao]
         if(this.unique == false)
+          // return this.dinheiroReal(this.varReal)   
           return this.decimal(this.varReal)   
         else
+          // return this.varReal = this.dinheiroReal(this.real = this.varReal)
           return this.varReal = this.decimal(this.real = this.varReal)
       },
       set(val) {
@@ -144,8 +151,10 @@ export default {
           else 
             this.varMoeda = (this.real * this.apiData[this.coinType2][this.cotacao]) / this.apiData[this.coinType1][this.cotacao]
         if(this.unique == true)
+          // return this.dinheiroReal(this.varMoeda) 
           return this.decimal(this.varMoeda)         
         else
+          // return this.varMoeda = this.dinheiroReal(this.moeda = this.varMoeda)
           return this.varMoeda = this.decimal(this.moeda = this.varMoeda)
       },
       set(val) {
